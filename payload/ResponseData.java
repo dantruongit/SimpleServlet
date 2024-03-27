@@ -24,4 +24,9 @@ public class ResponseData {
 		this.data = data;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("Data: ", data.toString());
+	}
+	
 }

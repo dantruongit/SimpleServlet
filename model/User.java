@@ -20,8 +20,8 @@ public class User {
 	public User(ResultSet resultSet) {
 		try {
 			this.setId(resultSet.getInt("id"));
-			this.setUsr(resultSet.getString("usr"));
-			this.setUsr(resultSet.getString("usr"));
+			this.setUsr(resultSet.getString("username"));
+			this.setPwd(resultSet.getString("password"));
 			this.setCreated_at(resultSet.getTimestamp("created_at"));
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -52,6 +52,13 @@ public class User {
 	public void setCreated_at(Timestamp timestamp) {
 		this.created_at = timestamp;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", usr=" + usr + ", pwd=" + pwd + ", created_at=" + created_at + "]";
+	}
+	
+	
 	
 	
 }

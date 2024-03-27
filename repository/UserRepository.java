@@ -30,7 +30,7 @@ public class UserRepository {
 	
 	public User getUserByUsrAndPwd(String usr, String pwd) {
 		Connection connection = config.MySqlConnection.getConnection();
-		String query = "SELECT * FROM users u where u.usr = ? and u.pwd = ?";
+		String query = "SELECT * FROM User u where u.username = ? and u.password = ?";
 		User user = null;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -43,6 +43,26 @@ public class UserRepository {
 			}
 			connection.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return user;
+	}
+	
+	public User getUserByUsername(String usr) {
+		Connection connection = config.MySqlConnection.getConnection();
+		String query = "SELECT * FROM User u where u.username = ?";
+		User user = null;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, usr);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				user =  new User(resultSet);
+			}
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 		return user;
